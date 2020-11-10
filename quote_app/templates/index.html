@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    {% load static %}
+    <link rel='stylesheet' href="{% static 'styles.css' %}">
+</head>
+<body style='background-color:rgb(65, 139, 228)'>
+    <div id='reg'>
+        <h1>Register</h1>
+        <form action='/register' method='POST'>
+            {% csrf_token %}
+            <label>First Name</label>
+            <input type='text' name='first_name'><br>
+            <label>Last Name</label>
+            <input type='text' name='last_name'><br>
+            <label>Email</label>
+            <input type='email' name='email'><br>
+            <label>Password</label>
+            <input type='password' name='password'><br>
+            <label>Confirm PW</label>
+            <input type='password' name='confirm_pw'><br>
+            <input type=submit value='Register'>
+        </form>
+    </div>
+    
+    {% if messages %}
+    <ul>
+        {% for error in messages %}
+        <li>{{error}}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+        
+
+    <div id='login'>
+        <h1>Login</h1>
+        <form action='/login' method='POST'>
+            {% csrf_token %}
+            <label>Email</label>
+            <input type='email' name='email'><br>
+            <label>Password</label>
+            <input type='password' name='password'><br>
+            <input type=submit value='Login'>
+        </form>
+    </div>
+    
+</body>
+</html>

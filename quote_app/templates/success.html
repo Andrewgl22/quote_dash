@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quote Dash</title>
+    <style>
+        body {
+            background-color:rgb(37, 159, 118)
+        }
+    </style>
+    {% load static %}
+    <link rel='stylesheet' href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div id='success_header'>
+        <h1 style='display:inline-block;'>Welcome {{request.session.user_name}}!</h1>
+    </div>
+    <div id='quote_wall'>
+        {% for quote in all_quotes %}
+            <div class='quote'>
+                <p><b>{{quote.author}}:</b> "{{quote.quote}}"</p>
+                <p>Posted by: <a href='/user/{{quote.user.id}}'>{{quote.user.first_name}} {{quote.user.last_name}}</a></p>
+                {% if quote.user.id == request.session.user_id %}
+                    <a href='/delete/{{quote.id}}'>Delete Post</a>
+                {% endif %}
+                <div>
+                    <p style='display:inline-block;'>{{0}} people like this</p>
+                    <form action='/like' method='POST' style='display:inline-block;'>
+                        {% csrf_token %}
+                        <input type="hidden" name='quote' value='{{quote.id}}'>
+                        <input type="hidden" name='like' value='one'>
+                        <input type=submit value="Like!">
+                    </form>
+                </div>
+
+            </div>
+        {% endfor %}
+    </div>
+
+    <div id='quote_form'>
+        <a href='/myaccount/{{request.session.user_id}}'>Edit My Account</a>
+        <a href='/logout'>Logout</a>
+        <h1 style='margin-top:20px;'>Add a Quote!</h1>
+        <form action='/add_quote' method='POST'>
+            {% csrf_token %}
+            <label>Author</label>
+            <input type=text name='author'><br>
+            <label>Quote</label>
+            <textarea name='quote'></textarea><br><br>
+            <input type=submit value='Submit'>
+        </form>
+        {% if messages %}
+        <ul>
+            {% for error in messages %}
+            <li>{{error}}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+
+    </div>
+</body>
+</html>

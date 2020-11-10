@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Page</title>
+    {% load static %}
+    <link rel='stylesheet' href="{% static 'styles.css' %}">
+    <style>
+        body {
+            background-color:rgb(233, 182, 72)
+        }
+    </style>
+</head>
+<body>
+    <div id='user_header'>
+        <a href='/success'>Back</a>
+        <a href='/logout'>Logout</a>
+    </div>
+    <div id='user_quotes'>
+        <h1>{{user.first_name}} {{user.last_name}}'s Quotes</h1>
+        {% for quote in user.quotes.all %}
+            <div class='quote'>
+                <p>{{quote.author}}: "{{quote.quote}}"</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    
+</body>
+</html>

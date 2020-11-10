@@ -1,0 +1,50 @@
+* {
+    margin:5px;
+}
+
+#reg {
+    display:inline-block;
+}
+
+#login {
+    display:inline-block;
+}
+
+#quote_form {
+    display:inline-block;
+    padding:10px;
+    vertical-align: top;
+    margin-top:15px;
+    margin-left:200px;
+}
+
+#quote_wall {
+    display:inline-block;
+    padding:10px;
+    margin-top:15px;
+}
+
+.quote {
+    border:2px solid black;
+    padding:15px;
+
+}
+
+
+#success_header {
+    display:block;
+}
+
+#edit_links {
+    color:red;
+    margin-left:20%;
+}
+
+#user_quotes {
+    display:inline-block;
+}
+
+#user_header {
+    display:block;
+    margin-left:50%;
+}
